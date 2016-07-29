@@ -311,6 +311,12 @@ void rcc_osc_ready_int_clear(enum rcc_osc osc)
 	case RCC_LSI:
 		RCC_CIR |= RCC_CIR_LSIRDYC;
 		break;
+	case RCC_PLLSAI:
+		RCC_CIR |= RCC_CIR_PLLSAIRDYC;
+		break;
+	case RCC_PLLI2S:
+		RCC_CIR |= RCC_CIR_PLLI2SRDYC;
+		break;
 	}
 }
 
@@ -331,6 +337,12 @@ void rcc_osc_ready_int_enable(enum rcc_osc osc)
 		break;
 	case RCC_LSI:
 		RCC_CIR |= RCC_CIR_LSIRDYIE;
+		break;
+	case RCC_PLLSAI:
+		RCC_CIR |= RCC_CIR_PLLSAIRDYIE;
+		break;
+	case RCC_PLLI2S:
+		RCC_CIR |= RCC_CIR_PLLI2SRDYIE;
 		break;
 	}
 }
@@ -353,6 +365,12 @@ void rcc_osc_ready_int_disable(enum rcc_osc osc)
 	case RCC_LSI:
 		RCC_CIR &= ~RCC_CIR_LSIRDYIE;
 		break;
+	case RCC_PLLSAI:
+		RCC_CIR &= ~RCC_CIR_PLLSAIRDYIE;
+		break;
+	case RCC_PLLI2S:
+		RCC_CIR &= ~RCC_CIR_PLLI2SRDYIE;
+		break;
 	}
 }
 
@@ -361,22 +379,20 @@ int rcc_osc_ready_int_flag(enum rcc_osc osc)
 	switch (osc) {
 	case RCC_PLL:
 		return ((RCC_CIR & RCC_CIR_PLLRDYF) != 0);
-		break;
 	case RCC_HSE:
 		return ((RCC_CIR & RCC_CIR_HSERDYF) != 0);
-		break;
 	case RCC_HSI:
 		return ((RCC_CIR & RCC_CIR_HSIRDYF) != 0);
-		break;
 	case RCC_LSE:
 		return ((RCC_CIR & RCC_CIR_LSERDYF) != 0);
-		break;
 	case RCC_LSI:
 		return ((RCC_CIR & RCC_CIR_LSIRDYF) != 0);
-		break;
+	case RCC_PLLSAI:
+		return ((RCC_CIR & RCC_CIR_PLLSAIRDYF) != 0);
+	case RCC_PLLI2S:
+		return ((RCC_CIR & RCC_CIR_PLLI2SRDYF) != 0);
 	}
-
-	cm3_assert_not_reached();
+	return 0;
 }
 
 void rcc_css_int_clear(void)
@@ -406,6 +422,12 @@ void rcc_wait_for_osc_ready(enum rcc_osc osc)
 		break;
 	case RCC_LSI:
 		while ((RCC_CSR & RCC_CSR_LSIRDY) == 0);
+		break;
+	case RCC_PLLSAI:
+		while ((RCC_CR & RCC_CR_PLLSAIRDY) == 0);
+		break;
+	case RCC_PLLI2S:
+		while ((RCC_CR & RCC_CR_PLLI2SRDY) == 0);
 		break;
 	}
 }
@@ -446,6 +468,12 @@ void rcc_osc_on(enum rcc_osc osc)
 	case RCC_LSI:
 		RCC_CSR |= RCC_CSR_LSION;
 		break;
+	case RCC_PLLSAI:
+		RCC_CSR |= RCC_CR_PLLSAION;
+		break;
+	case RCC_PLLI2S:
+		RCC_CSR |= RCC_CR_PLLI2SON;
+		break;
 	}
 }
 
@@ -466,6 +494,12 @@ void rcc_osc_off(enum rcc_osc osc)
 		break;
 	case RCC_LSI:
 		RCC_CSR &= ~RCC_CSR_LSION;
+		break;
+	case RCC_PLLSAI:
+		RCC_CSR &= ~RCC_CR_PLLSAION;
+		break;
+	case RCC_PLLI2S:
+		RCC_CSR &= ~RCC_CR_PLLI2SON;
 		break;
 	}
 }
@@ -492,6 +526,7 @@ void rcc_osc_bypass_enable(enum rcc_osc osc)
 	case RCC_PLL:
 	case RCC_HSI:
 	case RCC_LSI:
+	default:
 		/* Do nothing, only HSE/LSE allowed here. */
 		break;
 	}
@@ -509,6 +544,7 @@ void rcc_osc_bypass_disable(enum rcc_osc osc)
 	case RCC_PLL:
 	case RCC_HSI:
 	case RCC_LSI:
+	default:
 		/* Do nothing, only HSE/LSE allowed here. */
 		break;
 	}
