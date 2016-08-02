@@ -485,10 +485,10 @@ void rcc_osc_on(enum rcc_osc osc)
 		RCC_CSR |= RCC_CSR_LSION;
 		break;
 	case RCC_PLLSAI:
-		RCC_CSR |= RCC_CR_PLLSAION;
+		RCC_CR |= RCC_CR_PLLSAION;
 		break;
 	case RCC_PLLI2S:
-		RCC_CSR |= RCC_CR_PLLI2SON;
+		RCC_CR |= RCC_CR_PLLI2SON;
 		break;
 	}
 }
@@ -512,10 +512,10 @@ void rcc_osc_off(enum rcc_osc osc)
 		RCC_CSR &= ~RCC_CSR_LSION;
 		break;
 	case RCC_PLLSAI:
-		RCC_CSR &= ~RCC_CR_PLLSAION;
+		RCC_CR &= ~RCC_CR_PLLSAION;
 		break;
 	case RCC_PLLI2S:
-		RCC_CSR &= ~RCC_CR_PLLI2SON;
+		RCC_CR &= ~RCC_CR_PLLI2SON;
 		break;
 	}
 }
@@ -624,6 +624,11 @@ void rcc_set_main_pll_hsi(uint32_t pllm, uint32_t plln, uint32_t pllp,
 			  uint32_t pllq, uint32_t pllr)
 {
 	uint32_t reg32 = RCC_PLLCFGR;
+	uint8_t		new_r;
+
+	/* If passed in value is legal, use it, else use version from register */
+	new_r = (pllr > 1) ? pllr :
+					     (reg32 >> RCC_PLLCFGR_PLLR_SHIFT) & RCC_PLLCFGR_PLLR_MASK;
 
 	/* mask out any previous values */
 	reg32 &= ~(
@@ -640,7 +645,7 @@ void rcc_set_main_pll_hsi(uint32_t pllm, uint32_t plln, uint32_t pllp,
 		(plln << RCC_PLLCFGR_PLLN_SHIFT) |
 		(((pllp >> 1) - 1) << RCC_PLLCFGR_PLLP_SHIFT) |
 		(pllq << RCC_PLLCFGR_PLLQ_SHIFT) |
-		(pllr << RCC_PLLCFGR_PLLR_SHIFT));
+		(new_r << RCC_PLLCFGR_PLLR_SHIFT));
 }
 
 /* Note it adjusts PLLP */
@@ -648,6 +653,12 @@ void rcc_set_main_pll_hse(uint32_t pllm, uint32_t plln, uint32_t pllp,
 			  uint32_t pllq, uint32_t pllr)
 {
 	uint32_t reg32 = RCC_PLLCFGR;
+	uint8_t		new_r;
+
+	/* If passed in value is legal, use it, else use version from register */
+	new_r = (pllr > 1) ? pllr :
+						 (reg32 >> RCC_PLLCFGR_PLLR_SHIFT) & RCC_PLLCFGR_PLLR_MASK;
+
 	/* mask out any previous values */
 	reg32 &= ~(
 		(RCC_PLLCFGR_PLLM_MASK << RCC_PLLCFGR_PLLM_SHIFT) |
@@ -661,8 +672,8 @@ void rcc_set_main_pll_hse(uint32_t pllm, uint32_t plln, uint32_t pllp,
 		(pllm << RCC_PLLCFGR_PLLM_SHIFT) |
 		(plln << RCC_PLLCFGR_PLLN_SHIFT) |
 		(((pllp >> 1) - 1) << RCC_PLLCFGR_PLLP_SHIFT) |
-		(pllr << RCC_PLLCFGR_PLLR_SHIFT) |
-		(pllq << RCC_PLLCFGR_PLLQ_SHIFT));
+		(pllq << RCC_PLLCFGR_PLLQ_SHIFT) |
+		(new_r << RCC_PLLCFGR_PLLR_SHIFT));
 }
 
 uint32_t rcc_system_clock_source(void)
