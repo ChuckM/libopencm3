@@ -243,6 +243,10 @@
 #define DSI_GHCR_WCMSB_MASK		0xff
 #define DSI_GHCR_WCLSB_SHIFT		8
 #define DSI_GHCR_WCLSB_MASK		0xff
+#define DSI_GHCR_DATA1_SHIFT		16	/* data 1 in 'short' mode */
+#define DSI_GHCR_DATA1_MASK		0xff
+#define DSI_GHCR_DATA0_SHIFT		8	/* data 0 in 'short' mode */
+#define DSI_GHCR_DATA0_MASK		0xff
 #define DSI_GHCR_VCID_SHIFT		6
 #define DSI_GHCR_VCID_MASK		0x3
 #define DSI_GHCR_DT_SHIFT		0
@@ -796,6 +800,13 @@
 #define DSI_WRPCR_ODF_DIV_8		3
 #define DSI_WRPCR_IDF_SHIFT		11
 #define DSI_WRPCR_IDF_MASK		0xf
+#define DSI_WRPCR_IDF_DIV_1		0
+#define DSI_WRPCR_IDF_DIV_2		2
+#define DSI_WRPCR_IDF_DIV_3		3
+#define DSI_WRPCR_IDF_DIV_4		4
+#define DSI_WRPCR_IDF_DIV_5		5
+#define DSI_WRPCR_IDF_DIV_6		6
+#define DSI_WRPCR_IDF_DIV_7		7
 /* valid NDIV values 10 - 125 all other reserved */
 #define DSI_WRPCR_NDIV_SHIFT		2
 #define DSI_WRPCR_NDIV_MASK		0x7f

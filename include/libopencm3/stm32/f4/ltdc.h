@@ -153,6 +153,14 @@
 #define LTDC_GCR_HSPOL_ACTIVE_LOW  (0<<31)
 #define LTDC_GCR_HSPOL_ACTIVE_HIGH (1<<31)
 
+/* ST versions of the flags */
+#define LTDC_GCR_HSPOL			(1 << 31)
+#define LTDC_GCR_VSPOL			(1 << 30)
+#define LTDC_GCR_DEPOL			(1 << 29)
+#define LTDC_GCR_PCPOL			(1 << 28)
+#define LTDC_GCR_LTDCEN			(1 << 0)
+
+
 /* --- LTDC_SRCR values ---------------------------------------------------- */
 
 /* Vertical Blanking Reload */
@@ -234,6 +242,11 @@
 #define LTDC_LxCR_COLKEY_ENABLE    (1<<1)
 #define LTDC_LxCR_COLTAB_ENABLE    (1<<4)
 
+/* ST Micro versions of the bits */
+#define LTDC_LxCR_CLUTEN		(1 << 4)
+#define LTDC_LxCR_COLKEN		(1 << 1)
+#define LTDC_LxCR_LEN			(1 << 0)
+
 /* --- LTDC_LxWHPCR values ------------------------------------------------- */
 
 /* Window Horizontal Stop Position */
@@ -269,14 +282,25 @@
 #define LTDC_LxCKCR_CKBLUE_MASK         0xff
 
 /* LTDC_LxPFCR - Pixel formats */
-#define LTDC_LxPFCR_ARGB8888       (0b000)
-#define LTDC_LxPFCR_RGB888         (0b001)
-#define LTDC_LxPFCR_RGB565         (0b010)
-#define LTDC_LxPFCR_ARGB1555       (0b011)
-#define LTDC_LxPFCR_ARGB4444       (0b100)
-#define LTDC_LxPFCR_L8             (0b101)
-#define LTDC_LxPFCR_AL44           (0b110)
-#define LTDC_LxPFCR_AL88           (0b111)
+#define LTDC_LxPFCR_ARGB8888		(0b000)
+#define LTDC_LxPFCR_RGB888		(0b001)
+#define LTDC_LxPFCR_RGB565		(0b010)
+#define LTDC_LxPFCR_ARGB1555		(0b011)
+#define LTDC_LxPFCR_ARGB4444		(0b100)
+#define LTDC_LxPFCR_L8			(0b101)
+#define LTDC_LxPFCR_AL44		(0b110)
+#define LTDC_LxPFCR_AL88		(0b111)
+
+#define LTDC_LxPFCR_PF_ARGB8888		(0b000)
+#define LTDC_LxPFCR_PF_RGB888		(0b001)
+#define LTDC_LxPFCR_PF_RGB565		(0b010)
+#define LTDC_LxPFCR_PF_ARGB1555		(0b011)
+#define LTDC_LxPFCR_PF_ARGB4444		(0b100)
+#define LTDC_LxPFCR_PF_L8		(0b101)
+#define LTDC_LxPFCR_PF_AL44		(0b110)
+#define LTDC_LxPFCR_PF_AL88		(0b111)
+#define LTDC_LxPFCR_PF_SHIFT		0
+#define LTDC_LxPFCR_PF_MASK		0x7
 
 /* --- LTDC_LxCACR values -------------------------------------------------- */
 
@@ -305,9 +329,13 @@
 /* LTDC_LxBFCR - Blending factors - BF1 */
 #define LTDC_LxBFCR_BF1_CONST_ALPHA               (0b100)
 #define LTDC_LxBFCR_BF1_PIXEL_ALPHA_x_CONST_ALPHA (0b110)
+#define LTDC_LxBFCR_BF1_SHIFT		8
+#define LTDC_LxBFCR_BF1_MASK		0x7
 /* LTDC_LxBFCR - Blending factors - BF2 */
 #define LTDC_LxBFCR_BF2_CONST_ALPHA               (0b101)
 #define LTDC_LxBFCR_BF2_PIXEL_ALPHA_x_CONST_ALPHA (0b111)
+#define LTDC_LxBFCR_BF2_SHIFT		0
+#define LTDC_LxBFCR_BF2_MASK		0x7
 
 /* --- LTDC_LxCFBAR values ------------------------------------------------- */
 
