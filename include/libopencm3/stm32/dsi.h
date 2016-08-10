@@ -1,4 +1,4 @@
-/* This provides unification of code over STM32F subfamilies */
+/* This provides unification of code over STM32 subfamilies */
 
 /*
  * This file is part of the libopencm3 project.
@@ -20,6 +20,6 @@
 #if defined(STM32F4)
 #       include <libopencm3/stm32/f4/dsi.h>
 #else
-#       error "quadspi.h not available for this family."
+#       error "dsi.h not available for this family."
 #endif
 

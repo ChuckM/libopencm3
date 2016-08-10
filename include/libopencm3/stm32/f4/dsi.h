@@ -1,6 +1,5 @@
 /*
  * STM32F4 DSI Host Defines
- * vim: set ts=8 noexpandtab :
  *
  * Copyright (C) 2016, Chuck McManis <cmcmanis@mcmanis.com>
  *
