@@ -157,7 +157,8 @@
 
 /** }@ */
 
-#pragma once
+#ifndef USB_OTG_H
+#define USB_OTG_H
 
 /* Allow the different register groups to address both the HS and FS Set */
 #define USB_FS				USB_OTG_FS_BASE
