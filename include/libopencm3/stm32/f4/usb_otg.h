@@ -784,8 +784,8 @@
 #define OTG_DIEPCTLx_EPTYP_BULK		2
 #define OTG_DIEPCTLx_EPTYP_INTR		3
 #define OTG_DIEPCTLx_NAKSTS		(1 << 17)
-#define OTG_DIEPCTLx EONUM		(1 << 16)	/* 1+ (ISOC) */
-#define OTG_DIEPCTLx DPID		(1 << 16)	/* 1+ */
+#define OTG_DIEPCTLx_EONUM		(1 << 16)	/* 1+ (ISOC) */
+#define OTG_DIEPCTLx_DPID		(1 << 16)	/* 1+ */
 #define OTG_DIEPCTLx_USBAEP		(1 << 15)
 #define OTG_DIEPCTLx_MPSIZ_SHIFT	0
 #define OTG_DIEPCTLx_MPSIZ_MASK		0x3ff
@@ -859,8 +859,8 @@
 #define OTG_DOEPCTLx_EPTYP_BULK		2
 #define OTG_DOEPCTLx_EPTYP_INTR		3
 #define OTG_DOEPCTLx_NAKSTS		(1 << 17)
-#define OTG_DOEPCTLx EONUM		(1 << 16)	/* 1+ (ISOC) */
-#define OTG_DOEPCTLx DPID		(1 << 16)	/* 1+ */
+#define OTG_DOEPCTLx_EONUM		(1 << 16)	/* 1+ (ISOC) */
+#define OTG_DOEPCTLx_DPID		(1 << 16)	/* 1+ */
 #define OTG_DOEPCTLx_USBAEP		(1 << 15)
 #define OTG_DOEPCTLx_MPSIZ_SHIFT	0
 #define OTG_DOEPCTLx_MPSIZ_MASK		0x3ff
